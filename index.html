@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wheather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- cari lokasi -->
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="input city name..." />
+        <button class="btn">search</button>
+      </div>
+      <!-- error message -->
+      <div class="error-message">
+        <h2>Can not get your current location</h2>
+      </div>
+      <!-- cuaca saat ini -->
+      <div class="current-weather">
+        <div class="time-location">
+          <h2 class="location">-</h2>
+          <p class="today">Today</p>
+        </div>
+        <div class="weather">
+          <img src="" alt="" class="icon" />
+          <div class="temperature">
+            <span class="temperature-value">-</span>
+            <div class="temperature-unit"><span class="temperature-active">&#176;C</span></div>
+          </div>
+          <div class="additional">
+            <p class="feels-like">-</p>
+            <p class="humidity">-</p>
+            <p class="wind-speed">-</p>
+          </div>
+        </div>
+        <div class="weather-description">
+          <p class="description">-</p>
+        </div>
+      </div>
+      <!-- histori cuaca 8 hari kedepan -->
+      <div class="history-weather">
+        <h2>Weekly Forecast</h2>
+        <div class="forecast-week"></div>
+      </div>
+
+      <script src="app.js"></script>
+    </div>
+  </body>
+</html>
