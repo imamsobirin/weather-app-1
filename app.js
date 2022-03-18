@@ -15,7 +15,7 @@ const input = document.getElementById("search"),
   ikon = document.querySelector(".icon");
 
 if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition((position) => {
+  navigator.geolocation.getCurrentPosition(function (position) {
     long = position.coords.longitude;
     lat = position.coords.latitude;
 
@@ -23,7 +23,6 @@ if (navigator.geolocation) {
     var unit = "metric";
     //lokasi pengguna
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}&units=${unit}`;
-
     //histori cuaca
     let api3 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${unit}`;
 
@@ -31,7 +30,17 @@ if (navigator.geolocation) {
     searchButton.addEventListener("click", function () {
       city = input.value;
       const api2 = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+      fetch(api2)
+        .then((response) => response.json())
+        .then((data) => {
+          const { lat, lon } = data.coord;
+          const api4 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=metric`;
+          getApi(api4, isiTampilanHistori, "data");
+        });
+
       getApi(api2, isiTampilanHeader, "data");
+      // getApi(api4, isiTampilanHistori, "data");
+      input.value = "";
     });
 
     //enter untuk pencarian
@@ -70,13 +79,12 @@ function isiTampilanHeader(data) {
   kelembaban.innerHTML = `Humidity : ${humidity}%`;
   windSpeed.innerHTML = `Wind : ${wind} m/s`;
   lokasi.innerHTML = data.name;
-  console.log(icon);
   ikon.src = `http://openweathermap.org/img/w/${icon}.png`;
-  console.log(ikon.src);
 }
 
-const isiTampilanHistori = (data) => {
+function isiTampilanHistori(data) {
   //tanggal, icon, temperature, keterangan
+  history.innerHTML = "";
   data = data.daily;
   for (let i = 1; i < data.length; i++) {
     let date = new Date(data[i].dt * 1000).toDateString();
@@ -84,6 +92,7 @@ const isiTampilanHistori = (data) => {
     const icon = data[i].weather[0].icon;
     const temp = data[i].temp.eve;
     const main = data[i].weather[0].main;
+
     history.innerHTML += `
       <div class="day">
         <p class="day-name">${date}</p>
@@ -93,4 +102,4 @@ const isiTampilanHistori = (data) => {
       </div>
     `;
   }
-};
+}
