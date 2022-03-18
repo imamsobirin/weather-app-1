@@ -25,9 +25,9 @@ if (navigator.geolocation) {
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${key}&units=${unit}`;
     //histori cuaca
     let api3 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}&units=${unit}`;
-
     //data berdasarkan pencarian kota
     searchButton.addEventListener("click", function () {
+      document.querySelector(".back-button").style.display = "block";
       city = input.value;
       const api2 = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
       fetch(api2)
@@ -42,13 +42,18 @@ if (navigator.geolocation) {
       // getApi(api4, isiTampilanHistori, "data");
       input.value = "";
     });
-
     //enter untuk pencarian
     input.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
         e.preventDefault();
         searchButton.click();
       }
+    });
+
+    document.querySelector(".back-button").addEventListener("click", function () {
+      getApi(api, isiTampilanHeader, "data");
+      getApi(api3, isiTampilanHistori, "data");
+      this.style.display = "none";
     });
 
     // data berdasar lokasi pengguna

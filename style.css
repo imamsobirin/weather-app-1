@@ -110,6 +110,17 @@ body {
   background-color: rgb(250, 206, 213);
   display: none;
 }
+.back-button {
+  text-align: left;
+  font-size: 12px;
+  color: rgb(112, 111, 111);
+  cursor: pointer;
+  display: none;
+  width: 130px;
+}
+.back-button:hover {
+  color: black;
+}
 @media (max-width: 1000px) {
   .forecast-week {
     justify-content: center;
