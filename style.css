@@ -121,13 +121,19 @@ body {
 .back-button:hover {
   color: black;
 }
-@media (max-width: 1000px) {
+@media (max-width: 428px) {
+  .container {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width: 835px) {
   .forecast-week {
     justify-content: center;
     gap: 20px;
   }
   .container {
-    width: 375px;
-    margin: 20px auto;
+    width: 70%;
   }
-} ;
+}
